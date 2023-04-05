@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-"""Class definition of Rectangle"""
-
+"""
+Defines an empty class Rectangle
+"""
 
 class Rectangle:
-    """The function doesn't have any block of code"""
+    """Empty representation of a rectangle"""
     pass
