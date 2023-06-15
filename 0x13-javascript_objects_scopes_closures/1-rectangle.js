@@ -1,7 +1,9 @@
 #!/usr/bin/node
+class Rectangle {
+  constructor (w, h) {
+    this.width = w;
+    this.height = h;
+  }
+}
 
-exports.converter = function (base) {
-  return function (num) {
-    return num.toString(base);
-  };
-};
+module.exports = Rectangle;
