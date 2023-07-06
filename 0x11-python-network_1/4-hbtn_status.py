@@ -3,8 +3,12 @@
 import requests
 
 
-if __name__ == "__main__":
-    r = requests.get("http://0.0.0.0:5000/status")
+def make_request():
+    req = requests.get("http://0.0.0.0:5000/status")
     print("Body response:")
-    print("\t- type: {}".format(type(r.text)))
-    print("\t- content: {}".format(r.text))
+    print("\t- type: {}".format(type(req.text)))
+    print("\t- content: {}".format(req.text))
+
+
+if __name__ == "__main__":
+    make_request()
