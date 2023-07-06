@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""This fetches https://intranet.hbtn.io/status."""
+"""Script fetches a URL, and gets a response"""
 import requests
 
 
 def make_request():
-    req = requests.get("http://0.0.0.0:5000/status")
+    req = requests.get("https://alx-intranet.hbtn.io/status")
     print("Body response:")
     print("\t- type: {}".format(type(req.text)))
     print("\t- content: {}".format(req.text))
