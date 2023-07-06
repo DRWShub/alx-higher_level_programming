@@ -1,17 +1,23 @@
 #!/usr/bin/python3
-"""A script that:
-- takes in a URL,
-- sends a request to the URL
-- displays the body of the response (decoded in utf-8).
-"""
+"""Script fetches a URL, and gets a response"""
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError
+from sys import argv
+from urllib.parse import urlencode
+
+
+def display_error(url_str: str):
+    try:
+        req = Request(url_str)
+        with urlopen(req) as response:
+            output_body = response.read()
+        print(output_body.decode("utf-8"))
+    except HTTPError as e:
+        print("Error code: {}".format(e.code))
 
 
 if __name__ == "__main__":
-    import sys
-    from urllib import request, error
-
     try:
-        with request.urlopen(sys.argv[1]) as res:
-            print(res.read().decode('UTF-8'))
-    except error.HTTPError as er:
-        print('Error code:', er.code)
+        display_error(argv[1])
+    except IndexError:
+        raise
