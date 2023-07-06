@@ -1,23 +1,30 @@
 #!/usr/bin/python3
-"""A script tha:
-- takes in a letter
-- sends POST request to http://0.0.0.0:5000/search_user
-with the letter as a parameter.
-"""
-import sys
+"""Script takes a letter, sends a POST request"""
 import requests
+from sys import argv
+
+
+def display_request_status(letter: str):
+    payload = {}
+    payload["q"] = letter
+
+    url = "http://0.0.0.0:5000/search_user"
+    req = requests.post(url, data=payload)
+
+    try:
+        resp_dict = req.json()
+        if resp_dict:
+            print("[{}] {}".format(resp_dict.get("id"), resp_dict.get("name")))
+        else:
+            print("No result")
+    except requests.exceptions.JSONDecodeError:
+        print("Not a valid JSON")
 
 
 if __name__ == "__main__":
-    letter = "" if len(sys.argv) == 1 else sys.argv[1]
-    payload = {"q": letter}
-
-    r = requests.post("http://0.0.0.0:5000/search_user", data=payload)
     try:
-        response = r.json()
-        if response == {}:
-            print("No result")
-        else:
-            print("[{}] {}".format(response.get("id"), response.get("name")))
-    except ValueError:
-        print("Not a valid JSON")
+        letter = argv[1]
+    except IndexError:
+        letter = ""
+    finally:
+        display_request_status(letter)
